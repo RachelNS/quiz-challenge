@@ -1,0 +1,22 @@
+body {
+    font-family: 'Tillana', cursive;
+    background-color: #f5f5f5;
+}
+
+main {
+    margin-top: 10vh;
+}
+
+.col-6, .col-2 {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-info {
+    background-color: lavender;
+}
+
+.btn-info:hover {
+    background-color: purple;
+    color: white;
+}
