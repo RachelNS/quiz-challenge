@@ -12,11 +12,11 @@ main {
     justify-content: center;
 }
 
-.btn-info {
+#start {
     background-color: lavender;
 }
 
-.btn-info:hover {
+#start:hover {
     background-color: purple;
     color: white;
 }

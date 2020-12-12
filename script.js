@@ -1,4 +1,27 @@
-// TODO: Timer counts down 60 seconds, stops at zero
+var timeLeft = document.querySelector("#timer");
+var startButton = document.querySelector("#start");
+
+var startTime = 60;
+
+// Timer counts down 60 seconds, stops at zero
+function countDown() {
+    var timeInterval = setInterval(function() {
+        startTime--;
+        timeLeft.textContent = "Time: " + startTime; 
+        if (startTime === 0 ) {
+            clearInterval(timeInterval);
+            timeLeft.textContent = "Time's up!"
+        }
+    }, 1000);
+    
+
+}
+
+countDown();
+
+
+
+
 
 // TODO: When user clicks "start quiz" button:
     // TODO: Timer starts counting down
