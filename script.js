@@ -1,5 +1,10 @@
 var timeLeft = document.querySelector("#timer");
 var startButton = document.querySelector("#start");
+var introText = document.querySelector("#intro");
+var questionField = document.querySelector("#question");
+
+
+
 
 var startTime = 60;
 
@@ -13,19 +18,32 @@ function countDown() {
             timeLeft.textContent = "Time's up!"
         }
     }, 1000);
-    
-
 }
 
-countDown();
+// When user clicks "start quiz" button, countdown begins and intro paragraph disappears
+startButton.addEventListener("click", function(){
+    countDown();
+    introText.textContent = "";
+
+    var firstQuestion = {
+        question: "Here is a question.",
+        answer1: "clever but wrong answer.",
+        answer2: "second wrong answer.",
+        answer3: "wrong again!", 
+        answer4: "finally, you got one right."
+    }
+
+})
 
 
 
 
 
-// TODO: When user clicks "start quiz" button:
-    // TODO: Timer starts counting down
-    // TODO: Intro paragraph goes away, first question appears
+
+
+
+
+
 
     // TODO: While loop--while timer is not zero and there are more questions, these things happen
             // TODO: Questions disappear when they are answered, and are replaced with the next question. Each question is an unordered list with possible answers.

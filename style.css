@@ -12,11 +12,30 @@ main {
     justify-content: center;
 }
 
-#start {
+#highscores, #start {
     background-color: lavender;
 }
 
-#start:hover {
+#highscores:hover, #start:hover {
     background-color: purple;
     color: white;
 }
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: lavender;
+    font-size: 1.5em;
+    line-height: 1.5;
+  }
+
+  li:hover {
+      background-color: purple;
+      color:white;
+  }
