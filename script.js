@@ -1,7 +1,14 @@
+// This is the p tag in the upper left corner that displays the time countdown
 var timeLeft = document.querySelector("#timer");
+
+// This is the "start quiz" button
 var startButton = document.querySelector("#start");
+
+// This is the p tag giving instructions to the user at the start of the quiz
 var introText = document.querySelector("#intro");
-var questionField = document.querySelector("#question");
+
+// This is the h1 tag that says the name of the quiz
+var titleText = document.querySelector("big-text");
 
 
 
@@ -32,6 +39,7 @@ startButton.addEventListener("click", function(){
         answer3: "wrong again!", 
         answer4: "finally, you got one right."
     }
+
 
 })
 
