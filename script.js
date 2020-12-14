@@ -19,6 +19,7 @@ var chocieList = document.querySelector("#choices");
 // Time displayed in timeLeft @ start of game
 var startTime = 60;
 
+// Score @ beginning of game (not displayed)
 var score = 0;
 
 // First question in the quiz
@@ -26,15 +27,15 @@ var firstQuestion = {
     question: "All old people know each other! Don't you know that?",
     answer1: "Master Pakku",
     answer2: "King Bumi",
-    answer3: "Admiral Zhao", 
+    answer3: "Admiral Zhao",
     answer4: "Uncle Iroh",
 }
 
-// Secont question in the quiz
+// Second question in the quiz
 var secondQuestion = {
     question: "Hey! We're in enemy territory. Those are enemy birds.",
-    answer1: "Zuko", 
-    answer2: "Toph", 
+    answer1: "Zuko",
+    answer2: "Toph",
     answer3: "Mai",
     answer4: "Sokka",
 }
@@ -42,7 +43,7 @@ var secondQuestion = {
 // Third question in the quiz
 var thirdQuestion = {
     question: "Very well. But first I must finish my roast duck.",
-    answer1: "Uncle Iroh", 
+    answer1: "Uncle Iroh",
     answer2: "Jeong Jeong",
     answer3: "Monk Gyatso",
     answer4: "Master Piandao",
@@ -77,26 +78,26 @@ var sixthQuestion = {
 
 // Timer counts down 60 seconds, stops at zero
 function countDown() {
-    var timeInterval = setInterval(function() {
+    var timeInterval = setInterval(function () {
         startTime--;
-        timeLeft.textContent = "Time Remaining: " + startTime; 
-        if (startTime === 0 ) {
+        timeLeft.textContent = "Time Remaining: " + startTime;
+        if (startTime === 0) {
             clearInterval(timeInterval);
             timeLeft.textContent = "Time's up!"
+    
         }
+
     }, 1000);
 }
-
 // When user clicks "start quiz" button, countdown begins and intro paragraph disappears
-startButton.addEventListener("click", function(){
+startButton.addEventListener("click", function () {
     countDown();
     introText.textContent = "";
     titleText.textContent = "";
     startButton.style.display = "none";
-    
 
     // Populates h2 tag with question text, creates li tags to hold answer text
-    questionText.textContent = firstQuestion.question; 
+    questionText.textContent = firstQuestion.question;
     var firstAnswer = document.createElement("li");
     firstAnswer.textContent = firstQuestion.answer1;
     chocieList.appendChild(firstAnswer);
@@ -113,8 +114,11 @@ startButton.addEventListener("click", function(){
     fourthAnswer.textContent = firstQuestion.answer4;
     chocieList.appendChild(fourthAnswer);
 
-    
+
 })
+
+
+
 
 
 
@@ -132,5 +136,5 @@ startButton.addEventListener("click", function(){
             // TODO: If they answer incorrectly, deduct 10 seconds from the timer.
 
     // TODO: When all questions are answered or the timer runs out, display "game over" message with score
-        // TODO: Collect user initials and score, store in local storage. If score is greater than 3, display "Flame-O, hotman!" If score is lower than 3, display "That's rough, buddy."
+        // TODO: Collect user initials and score, store in local storage. If score is greater than 3, display "Flame-O, hotman! Brag to your friends!" If score is lower than 3, display "That's rough, buddy. Tell everyone how much you suck."
         // TODO: If they click "view high scores" button, retrieve user data from local storage and display
