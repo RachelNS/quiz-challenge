@@ -17,6 +17,24 @@ main {
     justify-content: center;
 }
 
+#intro {
+    display:none;
+}
+
+#user-stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.input-group {
+    padding: 10px;
+}
+
+label {
+    padding: 10px;
+}
+
 #main-content {
     background-color: #ffffe6;
     padding: 20px;
@@ -36,9 +54,16 @@ main {
     background-color: #800000;
     border: none;
     color: #ffffe6;
+    display: none;
 }
 
-#start:hover {
+#submit {
+    background-color: #800000;
+    border: none;
+    color: #ffffe6;
+}
+
+#start:hover, #submit:hover {
   background-color: black;  
 }
 

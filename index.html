@@ -16,7 +16,7 @@
     <div class="container">
         <header class="row">
             <div class="col-2">
-                <button type="button" class="btn btn-info" class = "button" id = "highscores">Stay Flamin'!</button>
+                <button type="button" class="btn btn-info" class = "button" id = "highscores">High Scores</button>
             </div>
             <div class="col-8"></div>
             <div class="col-2">
@@ -40,9 +40,20 @@
 
                     <div class="col-2"></div>
                     <div class="col-8">
-                        <p id="intro">The rules are simple. You have one minute to correctly match the quote from Avatar: The Last Airbender to the character who said it. Wrong answers will deduct 10 seconds from the clock, so don't be a nut-brained piece of colony trash or you'll run out of time. Hit the Yip Yip! button to start the quiz. Be sure to log your initials and score at the end, and hit the Stay Flamin'! button to compare your score to other people, if you're into that.</p>
+                        <p id="intro">The rules are simple. You have one minute to correctly match the quote from Avatar: The Last Airbender to the character who said it. Wrong answers will deduct 10 seconds from the clock, so don't be a nut-brained piece of colony trash or you'll run out of time. Hit the Yip Yip! button to start the quiz. Be sure to log your initials and score at the end, and hit the High Scores button to compare your score to other people, if you're into that.</p>
                         <ul id="choices"></ul>
-                        <form id="user-stats"></form>
+                        <form id="user-stats">
+                            <h3 id="results"></h3>
+                            <div class="input-group">
+                                <label for="initials">Initials</label>
+                                <input type="text" id="initials-input">
+                            </div>
+                            <div class="input-group">
+                                <label for="score">Score</label>
+                                <input type="text" id="score-display">
+                            </div>
+                            <button type="button" class="btn btn-info" class="button" id="submit">Stay flamin'!</button>
+                        </form>
                     </div>
                     <div class="col-2"></div>
 
