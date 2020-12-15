@@ -13,11 +13,11 @@ var titleText = document.querySelector("#big-text");
 // This is the h2 tag that will contain the question text
 var questionText = document.querySelector("#question-text")
 
-// This is the ul tag containing the questions
+// This is the div containing the questions
 var chocieList = document.querySelector("#choices");
 
 // Time displayed in timeLeft @ start of game
-var startTime = 5;
+var startTime = 60;
 
 // Score @ beginning of game (not displayed)
 var score = 0;
@@ -25,62 +25,37 @@ var score = 0;
 // This lays out quiz questions and their answers, indicating which are correct
 var quiz = [
     {
-        question1: "All old people know each other! Don't you know that?",
-        answers1: [
-            { text: "Master Pakku", correct: false },
-            { text: "King Bumi", correct: true },
-            { text: "Admiral Zhao", correct: false },
-            { text: "Uncle Iroh", correct: false },
-        ]
+        question: "All old people know each other! Don't you know that?",
+        answers: ["Master Pakku", "King Bumi", "Admiral Zhao", "Uncle Iroh",],
+        correctAnswer: "King Bumi"
     },
     {
-        question2: "Hey! We're in enemy territory. Those are enemy birds.",
-        answers2: [
-            { text: "Zuko", correct: false },
-            { text: "Toph", correct: false },
-            { text: "Mai", correct: false },
-            { text: "Sokka", correct: false },
-        ]
+        question: "Hey! We're in enemy territory. Those are enemy birds.",
+        answers: ["Zuko", "Toph", "Mai", "Sokka",],
+        correctAnswer: "Sokka",
     },
     {
-        question3: "Very well. But first I must finish my roast duck.",
-        answers3: [
-            { text: "Uncle Iroh", correct: true },
-            { text: "Jeong Jeong", correct: false },
-            { text: "Monk Gyatso", correct: false },
-            { text: "Master Piandao", correct: false },
-        ]
+        question: "Very well. But first I must finish my roast duck.",
+        answers: ["Uncle Iroh", "Jeong Jeong", "Monk Gyatso", "Master Piandao",],
+        correctAnswer: "Uncle Iroh",
+    },
+
+    {
+        question: "My own mother thought I was a monster. She was right, of course, but it still hurt.",
+        answers: ["Sokka", "Haru", "Azula", "Jet",],
+        correctAnswer: "Azula",
     },
     {
-        question4: "My own mother thought I was a monster. She was right, of course, but it still hurt.",
-        answers4: [
-            { text: "Sokka", correct: false },
-            { text: "Haru", correct: false },
-            { text: "Azula", correct: true },
-            { text: "Jet", correct: false },
-        ]
+        question: "You've seen nothing once, you've seen it a thousand times.",
+        answers: ["Zuko", "Toph", "Suki", "Katara",],
+        correctAnswer: "Toph",
     },
     {
-        question5: "You've seen nothing once, you've seen it a thousand times.",
-        answers5: [
-            { text: "Zuko", correct: false },
-            { text: "Toph", correct: true },
-            { text: "Suki", correct: false },
-            { text: "Katara", correct: false },
-        ]
-    },
-    {
-        question6: "My cabbages!",
-        answers6: [
-            { text: "Come on now", correct: false },
-            { text: "You know this", correct: false },
-            { text: "Seriously, this one's a gimmie", correct: false },
-            { text: "Cabbage vendor", correct: true },
-        ]
+        question: "My cabbages!",
+        answers: ["Come on now", "You know this", "Seriously, this one's a gimmie", "Cabbage vendor",],
+        correctAnswer: "Cababge vendor",
     }
 ]
-
-console.log(quiz);
 
 // Timer counts down 60 seconds, stops at zero
 function countDown() {
@@ -96,14 +71,48 @@ function countDown() {
     }, 1000);
 }
 
-// When user clicks "start quiz" button, countdown begins and intro paragraph disappears
+// // When user clicks "start quiz" button, countdown begins and intro paragraph disappears
 startButton.addEventListener("click", function () {
     countDown();
     introText.textContent = "";
     titleText.textContent = "";
-    startButton.style.display = "none";   
+    startButton.style.display = "none";
+    questionText.textContent = quiz[0].question;
+
+    // TODO: For each iteration of "quiz:"
+    // -Change questionText (h2) content to "quiz[i]"
+    // -Change answerList (li) text to quiz[i].answers[j]
+    // 
+
+
+
+    for (var i = 0; i < quiz[0].answers.length; i++) {
+        var answerList = document.createElement("li");
+        answerList.textContent = quiz[0].answers[i];
+        chocieList.appendChild(answerList);  
+    }
+
+    chocieList.addEventListener("click", function (event){
+        if(event.target.textContent===quiz[0].correctAnswer) {
+            score++;
+            console.log(score);
+        }
+    })
+
+    
+
+
+
+
+
 
 })
+
+
+//     // TODO: for loop going over quiz array, generate an li element for each answer. If the answer is correct, blah blah blah if the answer is wrong blah blah blah
+//     // TODO: seperate html for score page?
+
+// })
 
 
 
@@ -126,6 +135,3 @@ startButton.addEventListener("click", function () {
     // TODO: When all questions are answered or the timer runs out, display "game over" message with score
         // TODO: Collect user initials and score, store in local storage. If score is greater than 3, display "Flame-O, hotman! Brag to your friends!" If score is lower than 3, display "That's rough, buddy. Tell everyone how much you suck."
         // TODO: If they click "view high scores" button, retrieve user data from local storage and display
-
-
-

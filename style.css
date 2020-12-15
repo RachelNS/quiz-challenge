@@ -42,8 +42,7 @@ main {
   background-color: black;  
 }
 
-
-ul {
+#choices {
     list-style-type: none;
 }
 
