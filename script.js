@@ -34,7 +34,7 @@ var userResults = document.querySelector("#results");
 // This is the button to display previous user scores
 var highScores = document.querySelector("#highscores");
 
-userStats.style.display ="none";
+userStats.style.display = "none";
 
 
 
@@ -43,7 +43,7 @@ userStats.style.display ="none";
 var startTime = 60;
 
 // Score @ beginning of game (not displayed)
-var score = 5;
+var score = 0;
 
 // index of current iteration
 var index = 0;
@@ -61,11 +61,20 @@ var quiz = [
         correctAnswer: "Sokka",
     },
     {
+        question: "It's easy to do nothing. It's hard to forgive.",
+        answers: ["Aang", "Katara", "Gran-Gran", "Uncle Iroh"],
+        correctAnswer: "Aang",
+    },
+    {
         question: "Very well. But first I must finish my roast duck.",
         answers: ["Uncle Iroh", "Jeong Jeong", "Monk Gyatso", "Master Piandao",],
         correctAnswer: "Uncle Iroh",
     },
-
+    {
+        question: "Oh, Sokka, just hold hands.",
+        answers: ["Toph", "Aang", "Katara", "Princess Yue"],
+        correctAnswer: "Katara",
+    },
     {
         question: "My own mother thought I was a monster. She was right, of course, but it still hurt.",
         answers: ["Sokka", "Haru", "Azula", "Jet",],
@@ -75,6 +84,16 @@ var quiz = [
         question: "You've seen nothing once, you've seen it a thousand times.",
         answers: ["Zuko", "Toph", "Suki", "Katara",],
         correctAnswer: "Toph",
+    },
+    {
+        question: "Stealing is wrong...unless it's from pirates.",
+        answers: ["Aang", "Suki", "Katara", "Hama"],
+        correctAnswer: "Katara",
+    },
+    {
+        question: "Pants are an illusion, and so is death.",
+        answers: ["Huu", "Aunt Wu", "The Earth King", "Guru Pathik"],
+        correctAnswer: "Huu",
     },
     {
         question: "My cabbages!",
@@ -90,34 +109,40 @@ function countDown() {
         timeLeft.textContent = "Time Remaining: " + startTime;
         if (startTime === 0) {
             clearInterval(timeInterval);
-            timeLeft.textContent = "Time's up!"
-
         }
     }, 1000);
 }
 
+
 function renderQuiz() {
+    chocieList.textContent = "";
     questionText.textContent = quiz[index].question;
-    for (i=0; i<quiz[index].answers.length; i++) {
-        var answerList = document.createElement("li"); 
-            answerList.textContent = quiz[index].answers[i];
-            chocieList.appendChild(answerList);
+    for (i = 0; i < quiz[index].answers.length; i++) {
+        var answerList = document.createElement("li");
+        answerList.textContent = quiz[index].answers[i];
+        chocieList.appendChild(answerList);
     }
-
-    answerList.addEventListener("click", function(event){
-        if(event.target.textContent === quiz[index].correctAnswer) {
-            score++;
-        }
-        else{
-            timeLeft.textContent = startTime-10;
-        }
-        answerList.textContent = "";
-        index++;
-        renderQuiz();
-    })
-
     
+
 }
+
+document.querySelector("#choices").addEventListener("click", function (event) {
+    if (event.target.textContent === quiz[index].correctAnswer) {
+        score++;
+        console.log(score);
+    }
+    else {
+        startTime = startTime - 10;
+    }
+    index++;
+    renderQuiz();
+})
+
+
+
+
+
+
 
 // function renderQuiz--put questions on page w/answers 1 by one
 // use index variable to choose which index of the quiz array
@@ -192,26 +217,26 @@ startButton.addEventListener("click", function () {
 // }
 
 
-        // for (var i=0; i<quiz.length; i++) {
+// for (var i=0; i<quiz.length; i++) {
 
-        // }
+// }
 
-        // for (var i = 0; i < quiz[0].answers.length; i++) {
-        //     var answerList = document.createElement("li");
-        //     answerList.textContent = quiz[0].answers[i];
-        //     chocieList.appendChild(answerList);
-        // }
+// for (var i = 0; i < quiz[0].answers.length; i++) {
+//     var answerList = document.createElement("li");
+//     answerList.textContent = quiz[0].answers[i];
+//     chocieList.appendChild(answerList);
+// }
 
-        // chocieList.addEventListener("click", function (event) {
-        //     if (event.target.textContent === quiz[0].correctAnswer) {
-        //         score++;
-        //         console.log(score);
-        //     }
-        //     else {
-        //         timeLeft = timeLeft - 10;
-        //     }
+// chocieList.addEventListener("click", function (event) {
+//     if (event.target.textContent === quiz[0].correctAnswer) {
+//         score++;
+//         console.log(score);
+//     }
+//     else {
+//         timeLeft = timeLeft - 10;
+//     }
 
-        // })
+// })
 
 
 
@@ -221,14 +246,14 @@ startButton.addEventListener("click", function () {
 // })
 
 
-    // TODO: While loop--while timer is not zero and there are more questions, these things happen
-            // TODO: Questions disappear when they are answered, and are replaced with the next question. Each question is an unordered list with possible answers.
-            // TODO: If they click the correct answer, their score goes up. 
-            // TODO: If they answer incorrectly, deduct 10 seconds from the timer.
+// TODO: While loop--while timer is not zero and there are more questions, these things happen
+// TODO: Questions disappear when they are answered, and are replaced with the next question. Each question is an unordered list with possible answers.
+// TODO: If they click the correct answer, their score goes up. 
+// TODO: If they answer incorrectly, deduct 10 seconds from the timer.
 
-    // TODO: When all questions are answered or the timer runs out, display "game over" message with score
-        // TODO: Collect user initials and score, store in local storage. If score is greater than 3, display "Flame-O, hotman! Brag to your friends!" If score is lower than 3, display "That's rough, buddy. Tell everyone how much you suck."
-        // TODO: If they click "view high scores" button, retrieve user data from local storage and display
+// TODO: When all questions are answered or the timer runs out, display "game over" message with score
+// TODO: Collect user initials and score, store in local storage. If score is greater than 3, display "Flame-O, hotman! Brag to your friends!" If score is lower than 3, display "That's rough, buddy. Tell everyone how much you suck."
+// TODO: If they click "view high scores" button, retrieve user data from local storage and display
 
 
 
@@ -237,23 +262,23 @@ startButton.addEventListener("click", function () {
 userScore.value = score;
 var user = {
     initials: userInitials.value,
-    userScore: score   
+    userScore: score
 };
 
-if(score>=3) {
+if (score >= 3) {
     userResults.textContent = "Flame-o, Hotman! Brag to your friends!"
 }
-else{
+else {
     userResults.textContent = "That's rough, buddy. Tell everyone how much you suck."
 }
 
 // When user submits their data, it will be collected and stored in local storage
-submitButton.addEventListener("click", function(event){
+submitButton.addEventListener("click", function (event) {
     event.preventDefault();
-    if(userInitials.value==="") {
+    if (userInitials.value === "") {
         userResults.textContent = "Please enter your initials!"
     }
-    else{
+    else {
         userResults.textContent = "Success! Everyone knows your score now!"
         // Send user data to local storage
         localStorage.setItem("user", JSON.stringify(user));
@@ -261,12 +286,12 @@ submitButton.addEventListener("click", function(event){
 })
 
 // Retrieve last user data from local storage
-highScores.addEventListener("click", function(){
-userResults.textContent = "Here ya go, nosy!";
-var lastHighScore = localStorage.getItem("user", JSON.parse(user));
-console.log (lastHighScore);
-userInitials.value = lastHighScore.initials;
-userScore.value = lastHighScore.score;
+highScores.addEventListener("click", function () {
+    userResults.textContent = "Here ya go, nosy!";
+    var lastHighScore = localStorage.getItem("user", JSON.parse(user));
+    console.log(lastHighScore);
+    userInitials.value = lastHighScore.initials;
+    userScore.value = lastHighScore.score;
 })
 
 
