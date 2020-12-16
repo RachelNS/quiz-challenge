@@ -34,11 +34,6 @@ var userResults = document.querySelector("#results");
 // This is the button to display previous user scores
 var highScores = document.querySelector("#highscores");
 
-userStats.style.display = "none";
-
-
-
-
 // Time displayed in timeLeft @ start of game
 var startTime = 60;
 
@@ -47,6 +42,9 @@ var score = 0;
 
 // index of current iteration
 var index = 0;
+
+// At the start of the quiz, the user's score information is hidden
+userStats.style.display = "none";
 
 // This lays out quiz questions and their answers, indicating which are correct
 var quiz = [
@@ -113,7 +111,7 @@ function countDown() {
     }, 1000);
 }
 
-
+// Displays the question of each quiz index, loops over each answers array creating the list of answers for each question
 function renderQuiz() {
     chocieList.textContent = "";
     questionText.textContent = quiz[index].question;
@@ -122,34 +120,25 @@ function renderQuiz() {
         answerList.textContent = quiz[index].answers[i];
         chocieList.appendChild(answerList);
     }
+
+    // When time runs out or we run out of questions, display the user's stats
+    if(startTime <= 0 || index === 9) {
+        chocieList.style.display = "none";
+        timeLeft.style.display = "none";
+        questionText.textContent = "";
+        userStats.style.display = "block";
+
+        // Scorecard message changes based on user's score
+        if (score >= 5) {
+            userResults.textContent = "Flame-o, Hotman! Brag to your friends!"
+        }
+        else {
+            userResults.textContent = "That's rough, buddy. Tell everyone how much you suck."
+        }
     
+    }
 
 }
-
-document.querySelector("#choices").addEventListener("click", function (event) {
-    if (event.target.textContent === quiz[index].correctAnswer) {
-        score++;
-        console.log(score);
-    }
-    else {
-        startTime = startTime - 10;
-    }
-    index++;
-    renderQuiz();
-})
-
-
-
-
-
-
-
-// function renderQuiz--put questions on page w/answers 1 by one
-// use index variable to choose which index of the quiz array
-// text of question=quiz[index], would render question
-// for loop for answers
-// check for correct answer quiz[index]
-
 
 // // When user clicks "start quiz" button, countdown begins and intro paragraph disappears
 startButton.addEventListener("click", function () {
@@ -158,103 +147,21 @@ startButton.addEventListener("click", function () {
     titleText.textContent = "";
     startButton.style.display = "none";
     renderQuiz();
-
-
-
-    // // Loop over quiz array displaying each question in the h2 tag
-    // for (var i = 0; i < quiz.length; i++) {
-    //     questionText = quiz[i].question;
-    //     console.log(questionText);
-    // }
-
-    // // Loop over the answers for each question and create a new li tag to hold each answer
-    // for (var j = 0; j < quiz[j].answers.length; j++) {
-    //     var answerList = document.createElement("li");
-    //     answerList.textContent = quiz[j].answers[j];
-    //     chocieList.appendChild(answerList);
-    // }
-
 })
 
-
-
-
-
-
-
-
-
-
-// Tracking variable for while loop
-// var i = 0
-
-// As long as there is still time on the clock and the quiz has not run out of questions, run the following block of code
-// while (timeLeft !== 0 && i < quiz.length) {
-
-//     // For each 
-//     for (var j = 0; j < quiz[i].answers.length; j++) {
-//         questionText.textContent = quiz[i].question;
-
-//         var answerList = document.createElement("li");
-//         answerList.textContent = quiz[i].answers[j];
-//         chocieList.appendChild(answerList);
-
-//         chocieList.addEventListener("click", function (event) {
-//             if (event.target.textContent === quiz[i].correctAnswer) {
-//                 score++;
-//                 console.log(score);
-//             }
-//             else {
-//                 timeLeft = timeLeft - 10;
-//             }
-//             questionText.textContent = "";
-//             answerList.textContent = "";
-
-
-//         });
-//         i++;
-//     }
-// }
-
-
-// for (var i=0; i<quiz.length; i++) {
-
-// }
-
-// for (var i = 0; i < quiz[0].answers.length; i++) {
-//     var answerList = document.createElement("li");
-//     answerList.textContent = quiz[0].answers[i];
-//     chocieList.appendChild(answerList);
-// }
-
-// chocieList.addEventListener("click", function (event) {
-//     if (event.target.textContent === quiz[0].correctAnswer) {
-//         score++;
-//         console.log(score);
-//     }
-//     else {
-//         timeLeft = timeLeft - 10;
-//     }
-
-// })
-
-
-
-//     // TODO: for loop going over quiz array, generate an li element for each answer. If the answer is correct, blah blah blah if the answer is wrong blah blah blah
-//     // TODO: seperate html for score page?
-
-// })
-
-
-// TODO: While loop--while timer is not zero and there are more questions, these things happen
-// TODO: Questions disappear when they are answered, and are replaced with the next question. Each question is an unordered list with possible answers.
-// TODO: If they click the correct answer, their score goes up. 
-// TODO: If they answer incorrectly, deduct 10 seconds from the timer.
-
-// TODO: When all questions are answered or the timer runs out, display "game over" message with score
-// TODO: Collect user initials and score, store in local storage. If score is greater than 3, display "Flame-O, hotman! Brag to your friends!" If score is lower than 3, display "That's rough, buddy. Tell everyone how much you suck."
-// TODO: If they click "view high scores" button, retrieve user data from local storage and display
-
+// When user clicks on their answer choice, their score incrases if it is correct and the time remaining decreases if it is incorrect
+document.querySelector("#choices").addEventListener("click", function (event) {
+    if (event.target.textContent === quiz[index].correctAnswer) {
+        score++;
+        console.log(score);
+    }
+    else {
+        startTime = startTime - 10;
+    }
+    // Repeat the function for the next index in the quiz array
+    index++;
+    renderQuiz();
+})
 
 
 
@@ -265,12 +172,7 @@ var user = {
     userScore: score
 };
 
-if (score >= 3) {
-    userResults.textContent = "Flame-o, Hotman! Brag to your friends!"
-}
-else {
-    userResults.textContent = "That's rough, buddy. Tell everyone how much you suck."
-}
+
 
 // When user submits their data, it will be collected and stored in local storage
 submitButton.addEventListener("click", function (event) {
