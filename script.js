@@ -183,15 +183,24 @@ document.querySelector("#choices").addEventListener("click", function (event) {
     renderQuiz();
 })
 
-// Retrieve last user data from local storage when user clicks High Scores button
+//Get last user data from local storage
+var lastHighScore = JSON.parse(localStorage.getItem("user"));
+
+// Display last user data when user clicks high scores button
 highScores.addEventListener("click", function () {
+    questionText.textContent = "";
+    userStats.style.display = "block";
+    introText.textContent = "";
+    titleText.textContent = "";
+    startButton.style.display = "none";
     userResults.textContent = "Here ya go, nosy!";
-    var lastHighScore = localStorage.getItem("user", JSON.parse(user));
-    console.log(lastHighScore);
-    userInitials.value = user.initials;
-    userScore.value = user.score;
+    userInitials.value = lastHighScore.initials;
+    userScore.value = lastHighScore.score;
+    
 })
 
+
+console.log(lastHighScore);
 
 
 

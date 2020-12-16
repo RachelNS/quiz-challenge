@@ -21,7 +21,6 @@ main {
 #user-stats {
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .input-group {
@@ -35,7 +34,9 @@ label {
 #main-content {
     background-color: #ffffe6;
     padding: 20px;
+    margin-top: 20vh;
 }
+
 
 #highscores {
     background-color: #ffffe6;
