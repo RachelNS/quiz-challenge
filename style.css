@@ -17,9 +17,6 @@ main {
     justify-content: center;
 }
 
-#intro {
-    display:none;
-}
 
 #user-stats {
     display: flex;
@@ -54,7 +51,6 @@ label {
     background-color: #800000;
     border: none;
     color: #ffffe6;
-    display: none;
 }
 
 #submit {

@@ -16,13 +16,37 @@ var questionText = document.querySelector("#question-text")
 // This is the div containing the questions
 var chocieList = document.querySelector("#choices");
 
+// This is the form users will use to submit their initials and score
+var userStats = document.querySelector("#user-stats")
+
+// This is where the user's score will be displayed at the end of the game
+var userScore = document.querySelector("#score-display")
+
+// This is the input field for user initials
+var userInitials = document.querySelector("#initials-input");
+
+// This is the button for users to submit their stats
+var submitButton = document.querySelector("#submit");
+
+// This is the h3 tag displaying the results of the quiz
+var userResults = document.querySelector("#results");
+
+// This is the button to display previous user scores
+var highScores = document.querySelector("#highscores");
+
+userStats.style.display ="none";
+
+
 
 
 // Time displayed in timeLeft @ start of game
-var startTime = 5;
+var startTime = 60;
 
 // Score @ beginning of game (not displayed)
 var score = 5;
+
+// index of current iteration
+var index = 0;
 
 // This lays out quiz questions and their answers, indicating which are correct
 var quiz = [
@@ -72,25 +96,45 @@ function countDown() {
     }, 1000);
 }
 
+function renderQuiz() {
+    questionText.textContent = quiz[index].question;
+    for (i=0; i<quiz[index].answers.length; i++) {
+        var answerList = document.createElement("li"); 
+            answerList.textContent = quiz[index].answers[i];
+            chocieList.appendChild(answerList);
+    }
+
+    answerList.addEventListener("click", function(event){
+        if(event.target.textContent === quiz[index].correctAnswer) {
+            score++;
+        }
+        else{
+            timeLeft.textContent = startTime-10;
+        }
+        answerList.textContent = "";
+        index++;
+        renderQuiz();
+    })
+
+    
+}
+
+// function renderQuiz--put questions on page w/answers 1 by one
+// use index variable to choose which index of the quiz array
+// text of question=quiz[index], would render question
+// for loop for answers
+// check for correct answer quiz[index]
+
+
 // // When user clicks "start quiz" button, countdown begins and intro paragraph disappears
 startButton.addEventListener("click", function () {
     countDown();
     introText.textContent = "";
     titleText.textContent = "";
     startButton.style.display = "none";
+    renderQuiz();
 
-    
-    // For each index in the quiz array, run this block of code
-    quiz.forEach(function(quiz){
-        // Set h2 tag to current question text
-        questionText = quiz.question;
-        // Loop over each answers array and create a new tag to hold the text of each answer
-        for(i=0; i<quiz.answers.length; i++) {
-            var answerList = document.createElement("li"); 
-            answerList.textContent = quiz.answers[i];
-            chocieList.appendChild(answerList);
-        }
-    });
+
 
     // // Loop over quiz array displaying each question in the h2 tag
     // for (var i = 0; i < quiz.length; i++) {
@@ -106,6 +150,13 @@ startButton.addEventListener("click", function () {
     // }
 
 })
+
+
+
+
+
+
+
 
 
 
@@ -180,23 +231,7 @@ startButton.addEventListener("click", function () {
         // TODO: If they click "view high scores" button, retrieve user data from local storage and display
 
 
-// This is the form users will use to submit their initials and score
-var userStats = document.querySelector("#user-stats")
 
-// This is where the user's score will be displayed at the end of the game
-var userScore = document.querySelector("#score-display")
-
-// This is the input field for user initials
-var userInitials = document.querySelector("#initials-input");
-
-// This is the button for users to submit their stats
-var submitButton = document.querySelector("#submit");
-
-// This is the h3 tag displaying the results of the quiz
-var userResults = document.querySelector("#results");
-
-// This is the button to display previous user scores
-var highScores = document.querySelector("#highscores");
 
 // This variable is used to store the last user's data in local storage
 userScore.value = score;
