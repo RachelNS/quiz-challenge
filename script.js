@@ -43,6 +43,12 @@ var score = 0;
 // index of current iteration
 var index = 0;
 
+// This variable is used to store the last user's data in local storage
+var user = {
+    initials: userInitials.value,
+    userScore: userScore.value
+};
+
 // At the start of the quiz, the user's score information is hidden
 userStats.style.display = "none";
 
@@ -122,11 +128,12 @@ function renderQuiz() {
     }
 
     // When time runs out or we run out of questions, display the user's stats
-    if(startTime <= 0 || index === 9) {
+    if (startTime <= 0 || index === 9) {
         chocieList.style.display = "none";
         timeLeft.style.display = "none";
         questionText.textContent = "";
         userStats.style.display = "block";
+        userScore.value = score;
 
         // Scorecard message changes based on user's score
         if (score >= 5) {
@@ -135,9 +142,22 @@ function renderQuiz() {
         else {
             userResults.textContent = "That's rough, buddy. Tell everyone how much you suck."
         }
-    
-    }
 
+        // When user submits their data, it will be collected and stored in local storage
+        submitButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (userInitials.value === "") {
+                userResults.textContent = "Please enter your initials!"
+            }
+            else {
+                userResults.textContent = "Success! Everyone knows your score now!"
+                // Send user data to local storage
+                localStorage.setItem("user", JSON.stringify(user));
+            }
+            userInitials.value = "";
+            userScore.value = "";
+        })
+    }
 }
 
 // // When user clicks "start quiz" button, countdown begins and intro paragraph disappears
@@ -163,38 +183,15 @@ document.querySelector("#choices").addEventListener("click", function (event) {
     renderQuiz();
 })
 
-
-
-// This variable is used to store the last user's data in local storage
-userScore.value = score;
-var user = {
-    initials: userInitials.value,
-    userScore: score
-};
-
-
-
-// When user submits their data, it will be collected and stored in local storage
-submitButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    if (userInitials.value === "") {
-        userResults.textContent = "Please enter your initials!"
-    }
-    else {
-        userResults.textContent = "Success! Everyone knows your score now!"
-        // Send user data to local storage
-        localStorage.setItem("user", JSON.stringify(user));
-    }
-})
-
-// Retrieve last user data from local storage
+// Retrieve last user data from local storage when user clicks High Scores button
 highScores.addEventListener("click", function () {
     userResults.textContent = "Here ya go, nosy!";
     var lastHighScore = localStorage.getItem("user", JSON.parse(user));
     console.log(lastHighScore);
-    userInitials.value = lastHighScore.initials;
-    userScore.value = lastHighScore.score;
+    userInitials.value = user.initials;
+    userScore.value = user.score;
 })
+
 
 
 
