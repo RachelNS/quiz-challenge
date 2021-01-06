@@ -2,6 +2,7 @@
 
 Bootcamp Homework - Week 2
 A timed quiz based on a certain popular circa-2005 annimated series. 
+
 [Deployed on GitHub Pages](https://rachelns.github.io/quiz-challenge/)
 
 ## Usage
