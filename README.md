@@ -4,7 +4,7 @@ Bootcamp Homework - Week 2
 
 A timed quiz based on a certain popular circa-2005 animated series. 
 
-[Deployed on GitHub Pages](https://rachelns.github.io/quiz-challenge/)
+[Deployed on GitHub Pages](https://shame-wizards-apprentice.github.io/quiz-challenge/)
 
 ## Usage
 
